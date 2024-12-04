@@ -4,7 +4,7 @@ import { boundary } from "@shopify/shopify-app-remix/server";
 import { AppProvider } from "@shopify/shopify-app-remix/react";
 import { NavMenu } from "@shopify/app-bridge-react";
 import polarisStyles from "@shopify/polaris/build/esm/styles.css?url";
-import { authenticate, MONTHLY_PLAN } from "../shopify.server";
+import { authenticate, BASIC_PLAN } from "../shopify.server";
 import { getSubscriptionStatus } from "../models/Subscription.server";
 
 export const links = () => [{ rel: "stylesheet", href: polarisStyles }];
@@ -43,6 +43,7 @@ export default function App() {
           Home
         </Link>
         <Link to="/app/additional">Additional page</Link>
+        <Link to="/app/pricing">pricing</Link>
       </NavMenu>
       <Outlet />
     </AppProvider>

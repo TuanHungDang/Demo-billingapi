@@ -9,8 +9,8 @@ import { PrismaSessionStorage } from "@shopify/shopify-app-session-storage-prism
 import { restResources } from "@shopify/shopify-api/rest/admin/2024-10";
 import prisma from "./db.server";
 
-export const MONTHLY_PLAN ="Monthly subscription";
-
+export const BASIC_PLAN = "Basic subscription";
+export const PREMIUM_PLAN = "Premium subscription";
 
 const shopify = shopifyApp({
   apiKey: process.env.SHOPIFY_API_KEY,
@@ -22,14 +22,17 @@ const shopify = shopifyApp({
   sessionStorage: new PrismaSessionStorage(prisma),
   distribution: AppDistribution.AppStore,
   restResources,
-  billing:{
-    [MONTHLY_PLAN]:{
+  billing: {
+    [BASIC_PLAN]: {
       amount: 9,
-      currencyCode:"USD",
+      currencyCode: 'USD',
       interval: BillingInterval.Every30Days,
-      trialDays: 14,
-
-    }
+    },
+    [PREMIUM_PLAN]: {
+      amount: 18,
+      currencyCode: 'USD',
+      interval: BillingInterval.Annual,
+    },
   },
   future: {
     unstable_newEmbeddedAuthStrategy: true,
